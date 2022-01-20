@@ -2,51 +2,52 @@
 
 ## Before getting started
 
-1. Clone this repo.
+1. Create a brand new rails app inside this directory:
 
-2. Rename `.env.sample` to `.env` and fill it up with your github credentials.
+```bash
+$ rails new . --database postgresql --skip-test
+```
 
-3. Run `docker compose up`.
+2. Add rubocop gems:
 
-4. On a different window run `docker compose exec client bash`.
+```ruby
+# Gemfile
 
-5. Inside the bash terminal run the `bootstrap` command.
+group :development do
+  ...
+  gem 'rubocop', require: false
+  gem 'rubocop-rails', require: false
+  ...
+end
+```
+
+3. Resolve the rubocop offensses with `rubocop -A`
+4. Commit and push your changes for your team.
 
 ## General Instructions
 
-Follow the instructions on [school codeable](http://school.codeable.la/app/weeks/9/lessons/b917256b35f548e0bd262ca7dd8aeb7b) to start working on your assignment.
+Somesplash will be an open source platforms to share amazing photos with the
+world. Your job is to build the first MVP of the product. The current team is
+very small, there is no design department and the product owner is at the same
+time the general manager, operation manager, talent manager and so on. The GM
+has send you the design of the main views for the project with few details. You
+will need to infer a lot of details based on the design. Find the design
+**[here](https://www.figma.com/file/UqSMl0f43mV6yqguK6IrVR/Somesplash?node-id=888%3A708)**
 
-## About
+![https://p-vvf5mjm.t4.n0.cdn.getcloudapp.com/items/7KuE2YBy/67f77363-9c11-4da3-bb3c-b120b78db4ef.png?v=a9b94c013a59b9c7c47f15d165ef817d](https://p-vvf5mjm.t4.n0.cdn.getcloudapp.com/items/7KuE2YBy/67f77363-9c11-4da3-bb3c-b120b78db4ef.png?v=a9b94c013a59b9c7c47f15d165ef817d)
 
-### The app
+### Task 1: Build a ERD
 
-You can access your running app looking at `localhost:3000`.
+Based on the design, create a Entity Relationship Diagram with the tables,
+fields, data types (Rails data types) and relationships. Include a file with
+your ERD on your solution (JPG, PNG, PDF)
 
-> To be able to see your app running on any browser, run it using `rails server -b 0.0.0.0`.
-> Otherwise the server will start but you won't be able to see anything since the rails app is just showing for its local container.
+### Task 2: Build the project MVP
 
-### The database
+Using Rails and the MVC pattern, build all the models, controllers and views
+necessary to have a functional product.
 
-The db host is your db container, it's name will be something like: `somesplash-xxxx_db_1`.
+### Task 3: Fill the data
 
-When you configure the db connection on rails, your `config/database.yml` file should look similar to the example below.
-
-```ruby
-default: &default
-  adapter: postgresql
-  encoding: unicode
-  username: postgres
-  password: <%= ENV['PGPASSWORD'] %>
-  host: somesplash-xxxx_db_1
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-```
-
-If you want to connect to your db from a GUI client, you can use the next credentials:
-
-```
-  username: postgres
-  password: codeable
-  host: localhost
-  port: 54320
-  database: <rails_db_dev_name>
-```
+The objective is to add all the data necessary to resemble the design. You can
+do it manually but using the `seed.rb` file could be a better idea.
